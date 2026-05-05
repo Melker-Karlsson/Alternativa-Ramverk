@@ -1,0 +1,24 @@
+public class TodoService : ITodoService
+{
+    private ITodoRepository _todoRepository;
+
+    public TodoService(ITodoRepository todoRepository)
+    {
+        _todoRepository = todoRepository;
+    }
+
+    public async Task<IEnumerable<DTOTodo>> GetTodoListAsync()
+    {
+        return await _todoRepository.GetTodoListAsync();
+    }
+
+    public async Task<DTOTodo> PatchTodoAsync(int id, DTOTodo todo)
+    {
+        return await _todoRepository.PatchTodoAsync(id, todo);
+    }
+
+    public async Task<DTOTodo> PostTodoAsync(DTOTodo todo)
+    {
+        return await _todoRepository.PostTodoAsync(todo);
+    }
+}

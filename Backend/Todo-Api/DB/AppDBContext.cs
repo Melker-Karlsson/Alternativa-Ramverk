@@ -19,7 +19,7 @@ public class AppDBContext : DbContext
             {
                 Id = 1,
                 Title = "Get Milk",
-                context = "Drive to the store and buy some milk"
+                Context = "Drive to the store and buy some milk"
             }
         );
     }

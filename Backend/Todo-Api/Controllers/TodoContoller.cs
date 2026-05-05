@@ -22,7 +22,8 @@ public class TodoController : ControllerBase
     {
         try
         {
-            return Ok(await _todoService.PostTodoAsync(todo));
+            DTOTodo result = await _todoService.PostTodoAsync(todo);
+            return Ok(result);
         }
         catch(Exception eror)
         {
@@ -30,8 +31,8 @@ public class TodoController : ControllerBase
         }
     }
 
-    [HttpPatch]
-    public async Task<ActionResult> PatchTodoObject([FromBody] int id, [FromBody] DTOTodo todo)
+    [HttpPatch("{id}")]
+    public async Task<ActionResult> PatchTodoObject([FromRoute] int id, [FromBody] DTOTodo todo)
     {
         try
         {
