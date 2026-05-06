@@ -2,10 +2,11 @@ import { Component, OnInit, signal } from '@angular/core';
 import { TodoCard } from './todo-card/todo-card';
 import { Todo } from './Global/Todo';
 import GetTodo from './Global/GetTodo';
+import { AddTodoMenu } from './add-todo-menu/add-todo-menu';
 
 @Component({
   selector: 'app-root',
-  imports: [TodoCard],
+  imports: [TodoCard, AddTodoMenu],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

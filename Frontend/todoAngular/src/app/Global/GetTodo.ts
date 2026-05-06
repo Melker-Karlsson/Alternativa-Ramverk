@@ -7,6 +7,6 @@ export default async function GetTodo(): Promise<Todo[]>{
         return await response.json();
     } catch (error) {
         console.error("Failed to fetch todos:", error);
-        return []; // Return empty array on error
+        return [];
     }
 }
