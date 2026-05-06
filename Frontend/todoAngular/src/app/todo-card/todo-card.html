@@ -6,8 +6,16 @@
         <button>Delete</button>
     }
     @else {
-        <input type="text" [value]="todoInfo()?.title">
-        <input type="text" [value]="todoInfo()?.context">
-        <button (click)="togleEditing()">Submit</button>
+        <form [formGroup]="todoForm" (ngSubmit)="onSubmitApplyEdits()">
+            <label>
+                title
+                <input type="text" formControlName="Title" value="{{todoInfo()?.title}}">
+            </label>
+            <label>
+                context
+                <input type="text" formControlName="Context">
+            </label>
+            <button type="submit">Submit</button>
+        </form>
     }
 </div>

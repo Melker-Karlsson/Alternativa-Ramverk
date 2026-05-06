@@ -7,7 +7,7 @@ public class TodoService : ITodoService
         _todoRepository = todoRepository;
     }
 
-    public async Task<IEnumerable<DTOTodo>> GetTodoListAsync()
+    public async Task<IEnumerable<Todo>> GetTodoListAsync()
     {
         return await _todoRepository.GetTodoListAsync();
     }

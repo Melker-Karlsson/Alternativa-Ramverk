@@ -9,15 +9,10 @@ public class TodoRepository : ITodoRepository
         _db = db;
     }
 
-    public async Task<IEnumerable<DTOTodo>> GetTodoListAsync()
+    public async Task<IEnumerable<Todo>> GetTodoListAsync()
     {
         //reuturn Formateddata
-        return await _db.todos.Select(todo => new DTOTodo
-        {
-           Title = todo.Title,
-           Context = todo.Context 
-        })
-        .ToListAsync<DTOTodo>();
+        return await _db.todos.ToListAsync<Todo>();
     }
 
     public async Task<DTOTodo> PatchTodoAsync(int id, DTOTodo todo)
