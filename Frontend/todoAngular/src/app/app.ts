@@ -1,12 +1,17 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { TodoCard } from './todo-card/todo-card';
+import { Todo } from './Global/Todo';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [TodoCard],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('todoAngular');
+  selectedTodo: Todo = {
+    Title: "test",
+    Context: "test",
+    id: 1
+  }
 }
