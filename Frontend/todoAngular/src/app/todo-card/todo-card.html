@@ -3,10 +3,14 @@
         <h3>{{todoInfo()?.title}}</h3>
         <p>{{todoInfo()?.context}}</p>
         <button (click)="togleEditing()">Edit</button>
-        <button (click)="onDelete()">Delete</button>
+        <button (click)="todoService.delete(todoInfo()!.id)">Delete</button>
     }
     @else {
-        <form [formGroup]="todoForm" (ngSubmit)="onSubmitApplyEdits()">
+        <form [formGroup]="todoForm" (ngSubmit)="todoService.update({
+            id: todoInfo()!.id, 
+            title: todoForm.value.Title ?? '', 
+            context: todoForm.value.Context ?? ''}); togleEditing()">
+
             <label>
                 title
                 <input type="text" formControlName="Title">

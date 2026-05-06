@@ -1,8 +1,9 @@
-import { Component, effect, input, signal } from '@angular/core';
+import { Component, effect, input, signal, inject } from '@angular/core';
 import type { Todo } from '../Global/Todo'
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 import PatchTodo from '../Global/PatchTodo';
 import DeleteTodo from '../Global/DeleteTodo';
+import todoService from '../todoService';
 
 @Component({
   selector: 'app-todo-card',
@@ -13,6 +14,8 @@ import DeleteTodo from '../Global/DeleteTodo';
 export class TodoCard {
   todoInfo = input<Todo>();
   editing = signal<boolean>(false);
+
+  todoService = inject(todoService)
 
   todoForm = new FormGroup({
     Title: new FormControl(''),
@@ -34,20 +37,6 @@ export class TodoCard {
   togleEditing() {
     this.editing.set(!this.editing());
   }
-
-  onDelete(){
-    DeleteTodo(this.todoInfo()!.id)
-  }
-
-  onSubmitApplyEdits(){
-    PatchTodo(this.todoInfo()!.id, {
-      title: this.todoForm.value.Title ?? '',
-      context: this.todoForm.value.Context ?? ''
-    })
-
-    this.togleEditing();
-  }
-  
 }
 
 
