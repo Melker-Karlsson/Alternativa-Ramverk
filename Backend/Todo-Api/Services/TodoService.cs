@@ -7,6 +7,11 @@ public class TodoService : ITodoService
         _todoRepository = todoRepository;
     }
 
+    public async Task DeleteTodo(int id)
+    {
+        await _todoRepository.DeleteTodo(id);
+    }
+
     public async Task<IEnumerable<Todo>> GetTodoListAsync()
     {
         return await _todoRepository.GetTodoListAsync();

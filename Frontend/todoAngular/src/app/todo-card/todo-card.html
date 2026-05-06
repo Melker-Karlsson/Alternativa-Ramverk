@@ -3,13 +3,13 @@
         <h3>{{todoInfo()?.title}}</h3>
         <p>{{todoInfo()?.context}}</p>
         <button (click)="togleEditing()">Edit</button>
-        <button>Delete</button>
+        <button (click)="onDelete()">Delete</button>
     }
     @else {
         <form [formGroup]="todoForm" (ngSubmit)="onSubmitApplyEdits()">
             <label>
                 title
-                <input type="text" formControlName="Title" value="{{todoInfo()?.title}}">
+                <input type="text" formControlName="Title">
             </label>
             <label>
                 context

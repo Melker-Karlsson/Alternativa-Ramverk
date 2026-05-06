@@ -2,6 +2,7 @@ import { Component, effect, input, signal } from '@angular/core';
 import type { Todo } from '../Global/Todo'
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 import PatchTodo from '../Global/PatchTodo';
+import DeleteTodo from '../Global/DeleteTodo';
 
 @Component({
   selector: 'app-todo-card',
@@ -32,6 +33,10 @@ export class TodoCard {
 
   togleEditing() {
     this.editing.set(!this.editing());
+  }
+
+  onDelete(){
+    DeleteTodo(this.todoInfo()!.id)
   }
 
   onSubmitApplyEdits(){

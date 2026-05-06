@@ -43,4 +43,18 @@ public class TodoController : ControllerBase
             return BadRequest(eror.Message);
         }
     }
+
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> DeleteTodo([FromRoute] int id)
+    {
+        try
+        {
+            await _todoService.DeleteTodo(id);
+            return Ok();
+        }
+        catch(Exception eror)
+        {
+            return BadRequest(eror.Message);
+        }
+    }
 }

@@ -9,6 +9,16 @@ public class TodoRepository : ITodoRepository
         _db = db;
     }
 
+    public async Task DeleteTodo(int id)
+    {
+        Todo? foundTodo = await _db.todos.FirstOrDefaultAsync(todo => todo.Id == id);
+        
+        if(foundTodo == null) throw new Exception("TodoObject was not Found");
+
+        _db.Remove(foundTodo);
+        await _db.SaveChangesAsync();
+    }
+
     public async Task<IEnumerable<Todo>> GetTodoListAsync()
     {
         //reuturn Formateddata
