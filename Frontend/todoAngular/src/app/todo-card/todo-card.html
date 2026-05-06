@@ -1,4 +1,13 @@
 <div>
-    <h3>{{todoInfo()?.title}}</h3>
-    <p>{{todoInfo()?.context}}</p>
+    @if(!editing()){
+        <h3>{{todoInfo()?.title}}</h3>
+        <p>{{todoInfo()?.context}}</p>
+        <button (click)="togleEditing()">Edit</button>
+        <button>Delete</button>
+    }
+    @else {
+        <input type="text" [value]="todoInfo()?.title">
+        <input type="text" [value]="todoInfo()?.context">
+        <button (click)="togleEditing()">Submit</button>
+    }
 </div>

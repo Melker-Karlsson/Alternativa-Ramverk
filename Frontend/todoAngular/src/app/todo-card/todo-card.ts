@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, signal } from '@angular/core';
 import type { Todo } from '../Global/Todo'
 
 @Component({
@@ -9,4 +9,11 @@ import type { Todo } from '../Global/Todo'
 })
 export class TodoCard {
   todoInfo = input<Todo>();
+  editing = signal<boolean>(false);
+  togleEditing() {
+    this.editing.set(!this.editing());
+  }
+  
 }
+
+
