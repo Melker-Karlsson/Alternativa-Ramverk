@@ -22,7 +22,7 @@ public class TodoController : ControllerBase
     {
         try
         {
-            DTOTodo result = await _todoService.PostTodoAsync(todo);
+            Todo result = await _todoService.PostTodoAsync(todo);
             return Ok(result);
         }
         catch(Exception eror)

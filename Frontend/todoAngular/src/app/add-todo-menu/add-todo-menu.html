@@ -1,5 +1,8 @@
 <div>
-    <form [formGroup]="addTodoForm" (ngSubmit)="onAddTodo()">
+    <form [formGroup]="addTodoForm" (ngSubmit)="todoService.add({
+        title: addTodoForm.value.Title ?? '',
+        context: addTodoForm.value.Context ?? ''
+    })">
         <label>
             title
             <input type="text" formControlName="Title">
@@ -8,6 +11,6 @@
             context
             <input type="text" formControlName="Context">
         </label>
-        <button type="submit">Submit</button>
+        <button type="submit">AddTodo</button>
     </form>
 </div>

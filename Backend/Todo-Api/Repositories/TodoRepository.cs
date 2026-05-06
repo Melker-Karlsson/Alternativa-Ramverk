@@ -46,25 +46,24 @@ public class TodoRepository : ITodoRepository
         };
     }
 
-    public async Task<DTOTodo> PostTodoAsync(DTOTodo todo)
+    public async Task<Todo> PostTodoAsync(DTOTodo todo)
     {
         //Check for empty inputs
         if(todo.Title == string.Empty) throw new Exception("Title can't be empty");
         if(todo.Context == string.Empty) throw new Exception("Context can't be empty");
 
         //Add and save todo object
-        await _db.AddAsync(new Todo
+        Todo newTodo = new Todo
         {
             Title = todo.Title,
             Context = todo.Context
-        });
+        };
+
+
+        await _db.AddAsync(newTodo);
         
         await _db.SaveChangesAsync();
 
-        return new DTOTodo
-        {
-            Title = todo.Title,
-            Context = todo.Context
-        };     
+        return newTodo;    
     }
 }

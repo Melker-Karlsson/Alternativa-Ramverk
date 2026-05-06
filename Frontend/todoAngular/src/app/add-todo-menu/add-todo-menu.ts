@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 import PostTodo from '../Global/PostTodo';
+import todoService from '../todoService';
+
 @Component({
   selector: 'app-add-todo-menu',
   imports: [ReactiveFormsModule],
@@ -13,10 +15,5 @@ export class AddTodoMenu {
     Context: new FormControl(''),
   });
 
-  onAddTodo(){
-    PostTodo({
-        title: this.addTodoForm.value.Title ?? '',
-        context: this.addTodoForm.value.Context ?? ''      
-    });
-  }
+  todoService = inject(todoService)
 }

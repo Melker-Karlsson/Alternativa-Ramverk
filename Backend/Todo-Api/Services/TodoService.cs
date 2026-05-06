@@ -22,7 +22,7 @@ public class TodoService : ITodoService
         return await _todoRepository.PatchTodoAsync(id, todo);
     }
 
-    public async Task<DTOTodo> PostTodoAsync(DTOTodo todo)
+    public async Task<Todo> PostTodoAsync(DTOTodo todo)
     {
         return await _todoRepository.PostTodoAsync(todo);
     }
