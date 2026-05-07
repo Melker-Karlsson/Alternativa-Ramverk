@@ -9,15 +9,20 @@ public class TodoRepository : ITodoRepository
         _db = db;
     }
 
-    public async Task<IEnumerable<DTOTodo>> GetTodoListAsync()
+    public async Task DeleteTodo(int id)
+    {
+        Todo? foundTodo = await _db.todos.FirstOrDefaultAsync(todo => todo.Id == id);
+        
+        if(foundTodo == null) throw new Exception("TodoObject was not Found");
+
+        _db.Remove(foundTodo);
+        await _db.SaveChangesAsync();
+    }
+
+    public async Task<IEnumerable<Todo>> GetTodoListAsync()
     {
         //reuturn Formateddata
-        return await _db.todos.Select(todo => new DTOTodo
-        {
-           Title = todo.Title,
-           Context = todo.Context 
-        })
-        .ToListAsync<DTOTodo>();
+        return await _db.todos.ToListAsync<Todo>();
     }
 
     public async Task<DTOTodo> PatchTodoAsync(int id, DTOTodo todo)
@@ -41,25 +46,24 @@ public class TodoRepository : ITodoRepository
         };
     }
 
-    public async Task<DTOTodo> PostTodoAsync(DTOTodo todo)
+    public async Task<Todo> PostTodoAsync(DTOTodo todo)
     {
         //Check for empty inputs
         if(todo.Title == string.Empty) throw new Exception("Title can't be empty");
         if(todo.Context == string.Empty) throw new Exception("Context can't be empty");
 
         //Add and save todo object
-        await _db.AddAsync(new Todo
+        Todo newTodo = new Todo
         {
             Title = todo.Title,
             Context = todo.Context
-        });
+        };
+
+
+        await _db.AddAsync(newTodo);
         
         await _db.SaveChangesAsync();
 
-        return new DTOTodo
-        {
-            Title = todo.Title,
-            Context = todo.Context
-        };     
+        return newTodo;    
     }
 }

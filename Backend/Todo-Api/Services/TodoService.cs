@@ -7,7 +7,12 @@ public class TodoService : ITodoService
         _todoRepository = todoRepository;
     }
 
-    public async Task<IEnumerable<DTOTodo>> GetTodoListAsync()
+    public async Task DeleteTodo(int id)
+    {
+        await _todoRepository.DeleteTodo(id);
+    }
+
+    public async Task<IEnumerable<Todo>> GetTodoListAsync()
     {
         return await _todoRepository.GetTodoListAsync();
     }
@@ -17,7 +22,7 @@ public class TodoService : ITodoService
         return await _todoRepository.PatchTodoAsync(id, todo);
     }
 
-    public async Task<DTOTodo> PostTodoAsync(DTOTodo todo)
+    public async Task<Todo> PostTodoAsync(DTOTodo todo)
     {
         return await _todoRepository.PostTodoAsync(todo);
     }

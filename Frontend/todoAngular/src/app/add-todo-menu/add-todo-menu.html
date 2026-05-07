@@ -1,0 +1,16 @@
+<div>
+    <form [formGroup]="addTodoForm" (ngSubmit)="todoService.add({
+        title: addTodoForm.value.Title ?? '',
+        context: addTodoForm.value.Context ?? ''
+    })">
+        <label>
+            title
+            <input type="text" formControlName="Title">
+        </label>
+        <label>
+            context
+            <input type="text" formControlName="Context">
+        </label>
+        <button type="submit">AddTodo</button>
+    </form>
+</div>
