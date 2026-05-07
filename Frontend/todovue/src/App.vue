@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <!-- Todo app content will go here -->
+    <AddTodo @add="add"/>
+    <TodoCard v-for="todo in todos" :key="todo.id" :todo="todo" @delete="removeTodo" @update="update"/>
   </div>
 </template>
 
@@ -9,12 +10,15 @@ import GetTodo from './Global/GetTodo';
 import PostTodo from './Global/PostTodo';
 import PatchTodo from './Global/PatchTodo';
 import DeleteTodo from './Global/DeleteTodo';
+import TodoCard from './components/TodoCard.vue';
+import AddTodo from './components/AddTodo.vue';
 
 export default {
   name: 'App',
 
   components: {
-
+    TodoCard,
+    AddTodo
   },
 
   data(){
@@ -29,11 +33,9 @@ export default {
       console.log(this.todos);
     },
 
-    delete(id){
+    removeTodo(id){
       DeleteTodo(id);
-      this.todos.update(todos => 
-          todos.filter(todo => todo.id !== id)
-      )
+      this.todos = this.todos.filter(todo => todo.id !== id)
     },
 
     update(todo){
@@ -41,15 +43,13 @@ export default {
         title: todo.title,
         context: todo.context
       })
-      this.todos.update(todos => 
-        todos.map(t => t.id === todo.id? todo : t)
-      )
+      this.todos = this.todos.map(t => t.id === todo.id? todo : t)
     },
 
     async add(todo){
       const newTodo = await PostTodo(todo);
       if(newTodo === null) return;
-      this.todos.update(todos => [...todos, newTodo])
+      this.todos = [...this.todos, newTodo];
     }
   },
 
