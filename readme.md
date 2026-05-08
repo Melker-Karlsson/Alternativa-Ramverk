@@ -1,8 +1,8 @@
 * Requirments
 
-.net 10.0 sdk 
-Node.js & npm
-Angular cli            (npm install -g @angular/cli) to install it globaly
+* .net 10.0 sdk 
+* Node.js & npm
+* Angular cli            (npm install -g @angular/cli) to install it globaly
 
 
 * Starting backend
